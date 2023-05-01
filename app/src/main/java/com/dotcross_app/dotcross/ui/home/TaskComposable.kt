@@ -55,11 +55,10 @@ private fun TaskView(
     Card(
         modifier = Modifier
             .shadow(
-                elevation = 10.dp,
-                shape = RoundedCornerShape(8.dp)
+                elevation = 4.dp,
+                shape = RoundedCornerShape(16.dp)
             )
             .fillMaxWidth()
-            .background(Color.White)
             .clickable { onTaskClick }
             //.padding(10.dp)
     ) {
