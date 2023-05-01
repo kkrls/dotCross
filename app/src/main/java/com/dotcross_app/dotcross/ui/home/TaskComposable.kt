@@ -129,13 +129,13 @@ fun DefaultPreview() {
             modifier = Modifier.padding(32.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            val TaskList: List<Task> = listOf<Task>(
+            val taskList: List<Task> = listOf<Task>(
                 Task(name = "Gym", date = null),
                 Task(name = "Soccer", date = null),
                 Task(name = "Sex", date = null),
             )
             TaskList(
-                TaskList, onItemClick = {}
+                taskList, onItemClick = {}
             )
         }
 

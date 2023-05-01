@@ -38,13 +38,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val TaskList: List<Task> = listOf<Task>(
+                    val taskList: List<Task> = listOf<Task>(
                         Task(name = "Gym", date = null),
                         Task(name = "Soccer", date = null),
                         Task(name = "Sex", date = null),
                     )
                     TaskList(
-                        TaskList, onItemClick = {}
+                        taskList, onItemClick = {}
                     )
                 }
             }
