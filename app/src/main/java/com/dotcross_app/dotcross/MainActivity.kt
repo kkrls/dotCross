@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dotcross_app.dotcross.data.Task
-import com.dotcross_app.dotcross.ui.home.TaskList
+import com.dotcross_app.dotcross.ui.home.DotCrossHomeScreen
 import com.dotcross_app.dotcross.ui.theme.DotCrossTheme
 
 class MainActivity : ComponentActivity() {
@@ -43,8 +43,10 @@ class MainActivity : ComponentActivity() {
                         Task(name = "Soccer", date = null),
                         Task(name = "Sex", date = null),
                     )
-                    TaskList(
-                        taskList, onItemClick = {}
+                    DotCrossHomeScreen(
+                        navigateToItemEntry = { /*TODO*/ },
+                        navigateToItemUpdate = {},
+                        taskList = taskList
                     )
                 }
             }

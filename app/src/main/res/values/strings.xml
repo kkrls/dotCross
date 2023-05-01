@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">dotCross</string>
     <string name="last_three_days">Last Three Days:</string>
+    <string name="empty_list">No Tasks created!</string>
+    <string name="add_task">Add Task</string>
 </resources>

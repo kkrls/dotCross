@@ -33,7 +33,7 @@ val Typography = Typography(
         fontFamily = Roboto,
         fontWeight = FontWeight.W500,
         fontSize = 16.sp
-    ),
+    )
 /* Other default text styles to override
     caption = TextStyle(
         fontFamily = FontFamily.Default,
