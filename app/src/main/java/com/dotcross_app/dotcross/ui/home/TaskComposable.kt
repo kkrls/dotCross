@@ -132,7 +132,7 @@ private fun TaskList(
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
-        modifier = Modifier.padding(8.dp),
+        modifier = Modifier.padding(4.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(taskList) { task ->
@@ -181,12 +181,19 @@ fun DotCrossHomeScreen(
             ExtendedFloatingActionButton(
                 onClick = navigateToItemEntry,
                 modifier = Modifier.navigationBarsPadding(),
-                text = { Text(text = stringResource(R.string.add_task))},
+                text = {
+                    Text(
+                        text = stringResource(R.string.add_task),
+                        style = MaterialTheme.typography.body1
+                    )
+                       },
+                contentColor = MaterialTheme.colors.onSurface,
+                backgroundColor = MaterialTheme.colors.onPrimary,
                 icon = {
                     Icon(
                         imageVector = Icons.Default.Add,
                         contentDescription = "",
-                        tint = MaterialTheme.colors.onPrimary
+                        tint = MaterialTheme.colors.onSurface
                     )
                 }
             )
