@@ -1,10 +1,7 @@
 package com.dotcross_app.dotcross.ui.home
 
-import android.content.ClipData
-import android.content.ClipData.Item
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,17 +16,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.dotcross_app.dotcross.R
 import com.dotcross_app.dotcross.data.Task
 import com.dotcross_app.dotcross.ui.theme.DotCrossTheme
-import java.util.TimerTask
 
 
 @Composable
@@ -106,9 +99,10 @@ private fun TaskView(
 
 @Composable
 private fun DotCrossTopBar(modifier: Modifier = Modifier) {
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .background(color = MaterialTheme.colors.background),
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = MaterialTheme.colors.background),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
@@ -176,7 +170,7 @@ fun DotCrossHomeScreen(
         topBar = {
             //Navigate Back function to implement
             DotCrossTopBar()
-        } ,
+        },
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 onClick = navigateToItemEntry,
@@ -186,7 +180,7 @@ fun DotCrossHomeScreen(
                         text = stringResource(R.string.add_task),
                         style = MaterialTheme.typography.body1
                     )
-                       },
+                },
                 contentColor = MaterialTheme.colors.onSurface,
                 backgroundColor = MaterialTheme.colors.onPrimary,
                 icon = {
