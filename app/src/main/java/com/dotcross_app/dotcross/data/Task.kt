@@ -1,12 +1,13 @@
 package com.dotcross_app.dotcross.data
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-@Entity(tableName = "task")
+import java.util.Date
+
 data class Task(
-    @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name:String,
-    val selected:Int = 0,
-    val date: String?
+    val datesSelected: Map<Date, Selection> = mapOf<Date, Selection>()
 )
+
+enum class Selection {
+    BLANK, SELECTED, UNSELECTED
+}
