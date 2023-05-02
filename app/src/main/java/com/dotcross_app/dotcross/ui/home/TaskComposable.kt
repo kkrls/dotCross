@@ -218,7 +218,7 @@ fun DefaultPreview() {
             val taskList: List<Task> = listOf<Task>(
                 Task(name = "Gym", date = null),
                 Task(name = "Soccer", date = null),
-                Task(name = "Sex", date = null),
+                Task(name = "Climbing", date = null),
             )
             DotCrossHomeScreen(
                 navigateToItemEntry = { /*TODO*/ },
