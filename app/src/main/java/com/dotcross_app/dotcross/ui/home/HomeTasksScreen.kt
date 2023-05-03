@@ -210,9 +210,9 @@ fun DefaultPreview() {
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             val taskList: List<Task> = listOf<Task>(
-                Task(name = "Gym", date = null),
-                Task(name = "Soccer", date = null),
-                Task(name = "Climbing", date = null),
+                Task(name = "Gym"),
+                Task(name = "Soccer"),
+                Task(name = "Climbing"),
             )
             DotCrossHomeScreen(
                 navigateToItemEntry = { /*TODO*/ },

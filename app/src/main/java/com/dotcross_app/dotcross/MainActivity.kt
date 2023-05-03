@@ -39,15 +39,15 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val taskList: List<Task> = listOf<Task>(
-                        Task(name = "Gym", date = null),
-                        Task(name = "Soccer", date = null),
-                        Task(name = "Climbing", date = null),
-                        Task(name = "Gym", date = null),
-                        Task(name = "Soccer", date = null),
-                        Task(name = "Climbing", date = null),
-                        Task(name = "Gym", date = null),
-                        Task(name = "Soccer", date = null),
-                        Task(name = "Climbing", date = null)
+                        Task(name = "Gym"),
+                        Task(name = "Soccer"),
+                        Task(name = "Climbing"),
+                        Task(name = "Gym"),
+                        Task(name = "Soccer"),
+                        Task(name = "Climbing"),
+                        Task(name = "Gym"),
+                        Task(name = "Soccer"),
+                        Task(name = "Climbing")
                     )
                     DotCrossHomeScreen(
                         navigateToItemEntry = { /*TODO*/ },
