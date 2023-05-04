@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 fun DotCrossTopAppBar(
     text: String,
     backEnabled: Boolean,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     navigateUp: () -> Unit = {}
 ) {
     if (backEnabled) {

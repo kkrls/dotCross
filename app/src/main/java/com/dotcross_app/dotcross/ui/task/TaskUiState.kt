@@ -20,3 +20,10 @@ fun TaskUiState.toTask(): Task = Task(
     name = name,
     datesSelected = datesSelected
 )
+
+fun TaskUiState.toTaskUiState(enabled: Boolean = false): TaskUiState = TaskUiState(
+    id = id,
+    name = name,
+    datesSelected = datesSelected,
+    enabled = enabled
+)
