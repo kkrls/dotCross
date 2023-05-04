@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.sp
 import com.dotcross_app.dotcross.data.Task
 import com.dotcross_app.dotcross.ui.home.DotCrossHomeScreen
 import com.dotcross_app.dotcross.ui.home.HomeBodyContent
+import com.dotcross_app.dotcross.ui.task.AddTaskBody
+import com.dotcross_app.dotcross.ui.task.TaskUiState
 import com.dotcross_app.dotcross.ui.theme.DotCrossTheme
 
 class MainActivity : ComponentActivity() {
@@ -50,9 +52,15 @@ class MainActivity : ComponentActivity() {
                         Task(name = "Soccer"),
                         Task(name = "Climbing")
                     )
-                    DotCrossHomeScreen(
-                        navigateToItemEntry = { /*TODO*/ },
-                        navigateToItemUpdate = {} )
+//                    DotCrossHomeScreen(
+//                        navigateToItemEntry = { /*TODO*/ },
+//                        navigateToItemUpdate = {} )
+                    AddTaskBody(
+                        taskUiState = TaskUiState(),
+                        modifier = Modifier,
+                        onItemValueChange = {},
+                        onSaveClick = {}
+                    )
                 }
             }
         }
