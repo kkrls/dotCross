@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dotcross_app.dotcross.data.Task
 import com.dotcross_app.dotcross.ui.home.DotCrossHomeScreen
+import com.dotcross_app.dotcross.ui.home.HomeBodyContent
 import com.dotcross_app.dotcross.ui.theme.DotCrossTheme
 
 class MainActivity : ComponentActivity() {
@@ -51,24 +52,17 @@ class MainActivity : ComponentActivity() {
                     )
                     DotCrossHomeScreen(
                         navigateToItemEntry = { /*TODO*/ },
-                        navigateToItemUpdate = {},
-                        taskList = taskList
-                    )
+                        navigateToItemUpdate = {} )
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     DotCrossTheme {
-        Greeting("Android")
+
     }
 }
