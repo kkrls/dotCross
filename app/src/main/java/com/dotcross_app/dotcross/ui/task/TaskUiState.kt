@@ -2,12 +2,12 @@ package com.dotcross_app.dotcross.ui.task
 
 import com.dotcross_app.dotcross.data.Selection
 import com.dotcross_app.dotcross.data.Task
-import java.util.*
+import java.sql.Date
 
 data class TaskUiState (
     val id: Int = 0,
     val name:String = "",
-    val datesSelected: Map<Date, Selection> = mapOf<Date, Selection>(),
+    val datesSelected: Map<Date, Selection> = mutableMapOf<Date, Selection>(),
     val enabled: Boolean = false
 )
 

@@ -24,9 +24,90 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dotcross_app.dotcross.R
+import com.dotcross_app.dotcross.data.Selection
 import com.dotcross_app.dotcross.data.Task
 import com.dotcross_app.dotcross.ui.theme.DotCrossTheme
+import java.sql.Date
 
+private fun getLastThreeDaysBeforeToday(): List<Date> {
+    var dates = mutableListOf<Date>()
+    val millisInADay: Long = 1000 * 60 * 60 * 24
+
+    for (i in 1..3){
+        dates.add(Date(System.currentTimeMillis() - (millisInADay * i)))
+    }
+
+    return dates
+}
+ private fun getTaskImageResource(selection: Selection? ) : Int {
+
+    val imageResource = when(selection) {
+        Selection.SELECTED -> R.drawable.green_circle
+        Selection.UNSELECTED -> R.drawable.red_circle
+        else -> {
+            R.drawable.blank_circle
+        }
+    }
+
+    return imageResource
+}
+
+@Composable
+fun TaskImages(
+    modifier: Modifier = Modifier,
+    task : Task
+) {
+
+    val lastThreeDays = getLastThreeDaysBeforeToday()
+    var selectionList = mutableListOf<Selection?>()
+    println(task.datesSelected)
+
+    for (day in lastThreeDays){
+        println("wtf" + task.datesSelected[day])
+        if (day in task.datesSelected.keys){
+            selectionList.add(task.datesSelected[day])
+        } else {
+            selectionList.add(Selection.BLANK)
+        }
+    }
+
+    Row( modifier = Modifier
+        .fillMaxWidth()
+    ) {
+        Image(
+            painter = painterResource(
+                id = getTaskImageResource(selectionList[2])
+            ),
+            contentDescription = "",
+            modifier = Modifier
+                .weight(1f)
+        )
+        Image(
+            painter = painterResource(
+                id = getTaskImageResource(selectionList[1])
+            ),
+            contentDescription = "",
+            modifier = Modifier
+                .weight(1f)
+        )
+        Image(
+            painter = painterResource(
+                id = getTaskImageResource(selectionList[0])
+            ),
+            contentDescription = "",
+            modifier = Modifier
+                .weight(1f)
+        )
+        Image(
+            painter = painterResource(
+                id = R.drawable.arrow_icon
+            ),
+            contentDescription = "",
+            modifier = Modifier
+                .weight(1f)
+        )
+    }
+}
 
 @Composable
 private fun TaskView(
@@ -60,40 +141,12 @@ private fun TaskView(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 16.dp)
+                    .padding(vertical = 16.dp),
+                horizontalArrangement = Arrangement.Start
             ) {
-                Image(
-                    painter = painterResource(
-                        id = R.drawable.green_circle
-                    ),
-                    contentDescription = "",
+                TaskImages(
+                    task = task,
                     modifier = Modifier
-                        .weight(1.2f)
-                        .clip(CircleShape)
-                )
-                Image(
-                    painter = painterResource(
-                        id = R.drawable.red_circle
-                    ),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .weight(1.2f)
-                )
-                Image(
-                    painter = painterResource(
-                        id = R.drawable.blank_circle
-                    ),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .weight(1.2f)
-                )
-                Image(
-                    painter = painterResource(
-                        id = R.drawable.arrow_icon
-                    ),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .weight(1.2f)
                 )
             }
         }
@@ -212,15 +265,19 @@ fun DefaultPreview() {
             modifier = Modifier.padding(32.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+            val date = Date(System.currentTimeMillis() - (1000 * 60 * 60 * 24))
+            val date2 = Date(System.currentTimeMillis() - (1000 * 60 * 60 * 24) * 2)
+            val dateMap = mutableMapOf(
+                 date to Selection.SELECTED,
+                date2 to Selection.SELECTED
+            )
             val taskList: List<Task> = listOf<Task>(
-                Task(name = "Gym"),
+                Task(name = "Gym", datesSelected = dateMap
+                ),
                 Task(name = "Soccer"),
                 Task(name = "Climbing"),
             )
-            HomeBodyContent(
-                taskList = taskList,
-                onItemClick = {}
-            )
+            HomeBodyContent(taskList = taskList, onItemClick = {})
         }
 
     }

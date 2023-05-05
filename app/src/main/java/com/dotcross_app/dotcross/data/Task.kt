@@ -1,11 +1,11 @@
 package com.dotcross_app.dotcross.data
 
-import java.util.Date
+import java.sql.Date
 
 data class Task(
     val id: Int = 0,
     val name:String,
-    val datesSelected: Map<Date, Selection> = mapOf<Date, Selection>()
+    val datesSelected: Map<Date, Selection> = mutableMapOf<Date, Selection>()
 )
 
 enum class Selection {
