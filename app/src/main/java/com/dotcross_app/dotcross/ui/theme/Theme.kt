@@ -21,7 +21,7 @@ private val LightColorPalette = lightColors(
 //    secondary = Teal200,
     surface = WhiteDotCross,
     onSurface = BlackDotCross,
-    onPrimary = LightGreyDotCross
+    onPrimary = LightGreyDotCross,
 
     /* Other default colors to override
     background = Color.White,
