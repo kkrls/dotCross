@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.dotcross_app.dotcross.data.TasksRepository
 
-class AddTaskViewModel (private val tasksRepository: TasksRepository): ViewModel() {
+class AddTaskViewModel (var tasksRepository: TasksRepository = TasksRepository()): ViewModel() {
 
     var taskUiState by mutableStateOf(TaskUiState())
         private set
@@ -15,9 +15,9 @@ class AddTaskViewModel (private val tasksRepository: TasksRepository): ViewModel
         taskUiState = newTaskUiState.copy(enabled = newTaskUiState.isValid())
     }
 
-    suspend fun saveTask() {
+    suspend fun saveTask(name: String) {
         if (taskUiState.isValid()) {
-            tasksRepository.insertTask(taskUiState.toTask())
+            tasksRepository.addToTaskList(name = name)
         }
     }
 }

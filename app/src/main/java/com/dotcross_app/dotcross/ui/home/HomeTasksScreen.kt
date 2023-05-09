@@ -26,15 +26,17 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dotcross_app.dotcross.R
 import com.dotcross_app.dotcross.data.Selection
 import com.dotcross_app.dotcross.data.Task
+import com.dotcross_app.dotcross.data.TasksRepository
 import com.dotcross_app.dotcross.ui.theme.DotCrossTheme
 import java.sql.Date
+import java.time.LocalDate
 
-private fun getLastThreeDaysBeforeToday(): List<Date> {
-    var dates = mutableListOf<Date>()
-    val millisInADay: Long = 1000 * 60 * 60 * 24
+private fun getLastThreeDaysBeforeToday(): List<LocalDate> {
+    var dates = mutableListOf<LocalDate>()
 
     for (i in 1..3){
-        dates.add(Date(System.currentTimeMillis() - (millisInADay * i)))
+        val localDate = LocalDate.now()
+        dates.add(localDate.minusDays(i.toLong()))
     }
 
     return dates
@@ -63,7 +65,6 @@ fun TaskImages(
     println(task.datesSelected)
 
     for (day in lastThreeDays){
-        println("wtf" + task.datesSelected[day])
         if (day in task.datesSelected.keys){
             selectionList.add(task.datesSelected[day])
         } else {
@@ -219,6 +220,7 @@ fun DotCrossHomeScreen(
     navigateToItemEntry: () -> Unit,
     navigateToItemUpdate: (Int) -> Unit,
     modifier: Modifier = Modifier,
+    taskList: List<Task>,
     homeViewModel: HomeViewModel = viewModel()
 ) {
     val homeUiState by homeViewModel.uiState.collectAsState()
@@ -250,7 +252,7 @@ fun DotCrossHomeScreen(
         },
     ) { innerPadding ->
         HomeBodyContent(
-            taskList = homeUiState.tasksList,
+            taskList = taskList,
             onItemClick = {},
             modifier = modifier.padding(innerPadding)
         )
@@ -265,19 +267,7 @@ fun DefaultPreview() {
             modifier = Modifier.padding(32.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            val date = Date(System.currentTimeMillis() - (1000 * 60 * 60 * 24))
-            val date2 = Date(System.currentTimeMillis() - (1000 * 60 * 60 * 24) * 2)
-            val dateMap = mutableMapOf(
-                 date to Selection.SELECTED,
-                date2 to Selection.SELECTED
-            )
-            val taskList: List<Task> = listOf<Task>(
-                Task(name = "Gym", datesSelected = dateMap
-                ),
-                Task(name = "Soccer"),
-                Task(name = "Climbing"),
-            )
-            HomeBodyContent(taskList = taskList, onItemClick = {})
+            HomeBodyContent(taskList = TasksRepository().getTaskList(), onItemClick = {})
         }
 
     }

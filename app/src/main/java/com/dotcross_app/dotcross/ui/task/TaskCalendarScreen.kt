@@ -1,4 +1,22 @@
 package com.dotcross_app.dotcross.ui.task
+/* for library: io.github.boguszpawlowski.composecalendar
+*
+*   Copyright 2022 Bogusz Pawłowski
+*
+*   Licensed under the Apache License, Version 2.0 (the "License");
+*   you may not use this file except in compliance with the License.
+*   You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+*   Unless required by applicable law or agreed to in writing, software
+*   distributed under the License is distributed on an "AS IS" BASIS,
+*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*   See the License for the specific language governing permissions and
+*   limitations under the License.
+*
+ */
+
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -20,6 +38,7 @@ import io.github.boguszpawlowski.composecalendar.rememberSelectableCalendarState
 import io.github.boguszpawlowski.composecalendar.selection.DynamicSelectionState
 import io.github.boguszpawlowski.composecalendar.selection.SelectionMode
 import java.sql.Date
+import java.time.LocalDate
 
 @Composable
 private fun TaskCalendarBody(
@@ -31,7 +50,6 @@ private fun TaskCalendarBody(
         modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
         SelectableCalendar(calendarState = calendarState)
-        SelectionControls(selectionState = calendarState.selectionState)
     }
 }
 
@@ -60,38 +78,13 @@ fun DayView(
     )
 }
 
-@Composable
-private fun SelectionControls(
-    selectionState: DynamicSelectionState,
-) {
-    Text(
-        text = "Calendar Selection Mode",
-        style = MaterialTheme.typography.h5,
-    )
-    SelectionMode.values().forEach { selectionMode ->
-        Row(modifier = Modifier.fillMaxWidth()) {
-            RadioButton(
-                selected = selectionState.selectionMode == selectionMode,
-                onClick = { selectionState.selectionMode = selectionMode }
-            )
-            Text(text = selectionMode.name)
-            Spacer(modifier = Modifier.height(4.dp))
-        }
-    }
-
-    Text(
-        text = "Selection: ${selectionState.selection.joinToString { it.toString() }}",
-        style = MaterialTheme.typography.h6,
-    )
-}
-
 
 @Preview(showBackground = true)
 @Composable
 fun TaskCalendarScreenPreview () {
     DotCrossTheme {
-        val date = Date(System.currentTimeMillis() - (1000 * 60 * 60 * 24))
-        val date2 = Date(System.currentTimeMillis() - (1000 * 60 * 60 * 24) * 2)
+        val date = LocalDate.now().minusDays(1)
+        val date2 = LocalDate.now().minusDays(2)
         val dateMap = mutableMapOf(
             date to Selection.SELECTED,
             date2 to Selection.SELECTED
