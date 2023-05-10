@@ -25,25 +25,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             DotCrossTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    DotCrossHomeScreen(taskList = TasksRepository().getTaskList(),
-                        navigateToItemEntry = { /*TODO*/ },
-                        navigateToItemUpdate = {},
-                        homeViewModel = HomeViewModel())
+                    DotCrossApp()
                 }
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    DotCrossTheme {
-
-    }
-}

@@ -17,8 +17,13 @@ import androidx.compose.ui.unit.dp
 import com.dotcross_app.dotcross.ui.theme.DotCrossTheme
 import com.dotcross_app.dotcross.DotCrossTopAppBar
 import com.dotcross_app.dotcross.R
+import com.dotcross_app.dotcross.ui.navigation.NavigationDestination
 import kotlinx.coroutines.launch
 
+object AddTaskDestination: NavigationDestination {
+    override val route = "add_task"
+    override val title = R.string.add_task_name
+}
 @Composable
 private fun TaskTextForm(
     taskUiState: TaskUiState,
@@ -70,8 +75,6 @@ fun AddTaskScreen(
     navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
     navigateBackEnabled: Boolean = true,
-    //add factory
-    viewModel: AddTaskViewModel
 ) {
     val coroutineScope = rememberCoroutineScope()
     Scaffold (
@@ -85,8 +88,8 @@ fun AddTaskScreen(
         }
     ){  innerPadding ->
         AddTaskBody(
-            taskUiState = viewModel.taskUiState,
-            onItemValueChange = viewModel::updateUiState,
+            taskUiState = TaskUiState(),
+            onItemValueChange = {},
             onSaveClick = {
                 coroutineScope.launch {
                     //viewModel.saveTask()

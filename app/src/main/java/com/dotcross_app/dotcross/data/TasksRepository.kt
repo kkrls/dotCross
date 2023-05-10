@@ -1,11 +1,13 @@
 package com.dotcross_app.dotcross.data
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 import java.time.LocalDate
 import kotlin.random.Random
 
 class TasksRepository() {
 
-    private var taskList = mutableListOf(
+    var tasksList = mutableListOf(
         Task(0, name = "Gym", datesSelected = getRandomDateMap()),
         Task(1, name = "Study Maths", datesSelected = getRandomDateMap()),
         Task(2, name = "Climbing", datesSelected = getRandomDateMap()),
@@ -29,11 +31,16 @@ class TasksRepository() {
         return mapReturned
     }
 
-    fun getTaskList(): List<Task> {
-        return taskList
+    fun getTaskList(): MutableList<Task> {
+        return tasksList
     }
 
     fun addToTaskList(name: String){
-        taskList.add(Task(id = taskList.size + 1, name = name))
+        tasksList.add(Task(id = tasksList.size + 1, name = name))
     }
+
+    fun getTask(taskId: Int): Flow<Task?> {
+        return getTask(taskId)
+    }
+
 }

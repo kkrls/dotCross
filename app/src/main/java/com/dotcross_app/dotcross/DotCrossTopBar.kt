@@ -1,5 +1,6 @@
 package com.dotcross_app.dotcross
 
+import androidx.compose.foundation.background
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
@@ -8,6 +9,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun DotCrossTopAppBar(
@@ -19,7 +21,8 @@ fun DotCrossTopAppBar(
     if (backEnabled) {
         TopAppBar(
             title = { Text(text) },
-            modifier = modifier,
+            modifier = modifier
+                .background(Color.White),
             navigationIcon = {
                 IconButton(onClick = navigateUp) {
                     Icon(

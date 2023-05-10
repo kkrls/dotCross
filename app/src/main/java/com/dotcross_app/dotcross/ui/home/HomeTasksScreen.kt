@@ -27,9 +27,16 @@ import com.dotcross_app.dotcross.R
 import com.dotcross_app.dotcross.data.Selection
 import com.dotcross_app.dotcross.data.Task
 import com.dotcross_app.dotcross.data.TasksRepository
+import com.dotcross_app.dotcross.ui.navigation.NavigationDestination
 import com.dotcross_app.dotcross.ui.theme.DotCrossTheme
 import java.sql.Date
 import java.time.LocalDate
+
+
+object HomeDestination : NavigationDestination {
+    override val route = "home"
+    override val title = R.string.app_name
+}
 
 private fun getLastThreeDaysBeforeToday(): List<LocalDate> {
     var dates = mutableListOf<LocalDate>()
@@ -62,7 +69,6 @@ fun TaskImages(
 
     val lastThreeDays = getLastThreeDaysBeforeToday()
     var selectionList = mutableListOf<Selection?>()
-    println(task.datesSelected)
 
     for (day in lastThreeDays){
         if (day in task.datesSelected.keys){
@@ -124,7 +130,7 @@ private fun TaskView(
                 shape = RoundedCornerShape(32.dp)
             )
             .fillMaxWidth()
-            .clickable { onTaskClick }
+            .clickable { onTaskClick(task) }
     ) {
         Column() {
             Text(
@@ -179,15 +185,15 @@ private fun DotCrossTopBar(modifier: Modifier = Modifier) {
 @Composable
 private fun TaskList(
     taskList: List<Task>,
-    onItemClick: (Task) -> Unit,
+    onTaskClick: (Task) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = Modifier.padding(4.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(taskList) { task ->
-            TaskView(task = task, onTaskClick = {})
+        items(items = taskList, key = {it.id}) { task ->
+            TaskView(task = task, onTaskClick = onTaskClick )
         }
     }
 }
@@ -195,7 +201,7 @@ private fun TaskList(
 @Composable
 fun HomeBodyContent(
     taskList: List<Task>,
-    onItemClick: (Int) -> Unit,
+    onTaskClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -210,28 +216,27 @@ fun HomeBodyContent(
                 style = MaterialTheme.typography.body1,
             )
         } else {
-            TaskList(taskList = taskList, onItemClick = {})
+            TaskList(taskList = taskList, onTaskClick = { onTaskClick(it.id)} )
         }
     }
 }
 
 @Composable
 fun DotCrossHomeScreen(
-    navigateToItemEntry: () -> Unit,
-    navigateToItemUpdate: (Int) -> Unit,
+    navigateToTaskEntry: () -> Unit,
+    navigateToCalendarView: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    taskList: List<Task>,
+    taskList: MutableList<Task>,
     homeViewModel: HomeViewModel = viewModel()
 ) {
     val homeUiState by homeViewModel.uiState.collectAsState()
     Scaffold(
         topBar = {
-            //Navigate Back function to implement
             DotCrossTopBar()
         },
         floatingActionButton = {
             ExtendedFloatingActionButton(
-                onClick = navigateToItemEntry,
+                onClick = navigateToTaskEntry,
                 modifier = Modifier.navigationBarsPadding(),
                 text = {
                     Text(
@@ -253,7 +258,7 @@ fun DotCrossHomeScreen(
     ) { innerPadding ->
         HomeBodyContent(
             taskList = taskList,
-            onItemClick = {},
+            onTaskClick = navigateToCalendarView,
             modifier = modifier.padding(innerPadding)
         )
     }
@@ -267,7 +272,7 @@ fun DefaultPreview() {
             modifier = Modifier.padding(32.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            HomeBodyContent(taskList = TasksRepository().getTaskList(), onItemClick = {})
+            HomeBodyContent(taskList = TasksRepository().getTaskList(), onTaskClick = {})
         }
 
     }

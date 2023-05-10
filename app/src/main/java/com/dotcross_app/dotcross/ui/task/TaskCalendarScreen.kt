@@ -23,27 +23,34 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.dotcross_app.dotcross.R
 import com.dotcross_app.dotcross.data.Selection
+import com.dotcross_app.dotcross.ui.navigation.NavigationDestination
 import com.dotcross_app.dotcross.ui.theme.DotCrossTheme
 import io.github.boguszpawlowski.composecalendar.SelectableCalendar
-import io.github.boguszpawlowski.composecalendar.day.DayState
 import io.github.boguszpawlowski.composecalendar.rememberSelectableCalendarState
 import io.github.boguszpawlowski.composecalendar.selection.DynamicSelectionState
 import io.github.boguszpawlowski.composecalendar.selection.SelectionMode
-import java.sql.Date
 import java.time.LocalDate
+
+object TaskCalendarDestination: NavigationDestination {
+    override val route = "task_calendar"
+    override val title = R.string.task_calendar_title
+    const val taskId = "taskId"
+    val routeWithArgs = "$route/{$taskId}"
+}
 
 @Composable
 private fun TaskCalendarBody(
     modifier: Modifier = Modifier,
-    taskUiState: TaskUiState,
+//    taskUiState: TaskUiState,
 ) {
     val calendarState = rememberSelectableCalendarState()
     Column(
@@ -78,6 +85,16 @@ fun DayView(
     )
 }
 
+@Composable
+fun TaskCalendarScreen(
+    navigateBack: () -> Unit,
+    modifier: Modifier = Modifier,
+   taskId: Int?
+) {
+    println(taskId)
+    TaskCalendarBody()
+}
+
 
 @Preview(showBackground = true)
 @Composable
@@ -89,8 +106,6 @@ fun TaskCalendarScreenPreview () {
             date to Selection.SELECTED,
             date2 to Selection.SELECTED
         )
-        TaskCalendarBody(taskUiState = TaskUiState(
-            name = "Gym", datesSelected = dateMap
-        ))
+        TaskCalendarBody()
     }
 }
