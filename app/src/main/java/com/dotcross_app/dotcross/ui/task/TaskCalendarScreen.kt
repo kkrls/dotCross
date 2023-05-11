@@ -18,7 +18,6 @@ package com.dotcross_app.dotcross.ui.task
  */
 
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -27,9 +26,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -45,10 +41,9 @@ import com.dotcross_app.dotcross.ui.navigation.NavigationDestination
 import com.dotcross_app.dotcross.ui.theme.DotCrossTheme
 import io.github.boguszpawlowski.composecalendar.SelectableCalendar
 import io.github.boguszpawlowski.composecalendar.day.Day
-import io.github.boguszpawlowski.composecalendar.day.DayState
 import io.github.boguszpawlowski.composecalendar.rememberSelectableCalendarState
-import kotlinx.coroutines.launch
 
+// Companion NavGraph route object
 object TaskCalendarDestination : NavigationDestination {
     override val route = "task_calendar"
     override val title = R.string.task_calendar_title
@@ -58,6 +53,7 @@ object TaskCalendarDestination : NavigationDestination {
 
 var taskIdLocal: Int = 0
 
+// Main screen composable of the task calendar screen
 @Composable
 fun TaskCalendarScreen(
     navigateBack: () -> Unit,
@@ -96,6 +92,7 @@ fun TaskCalendarScreen(
     }
 }
 
+// Composable that displays the main body of the Task Calendar screen
 @Composable
 private fun TaskCalendarBody(
     modifier: Modifier = Modifier,
@@ -107,8 +104,7 @@ private fun TaskCalendarBody(
     ) {
         SelectableCalendar(
             modifier = Modifier
-                .padding(8.dp)
-            ,
+                .padding(8.dp),
             calendarState = calendarState,
             dayContent = { dayState -> DayView(dayState) }
         )
@@ -152,6 +148,8 @@ private fun TaskCalendarBody(
     }
 }
 
+// Custom Composable used to display each separate day of the calendar. Used to change colour
+// according to the selection status
 @Composable
 fun DayView(dayState: Day) {
     val dayFromList = TasksRepository().getTask(taskIdLocal)
@@ -177,11 +175,10 @@ fun DayView(dayState: Day) {
             .clickable {
                 TasksRepository().addSelection(taskIdLocal, dayState.date)
                 println(TasksRepository().getTask(taskId = taskIdLocal).datesSelected)
-            }
-        ,
+            },
         contentAlignment = Alignment.Center,
 
-    ) {
+        ) {
         Text(dayState.date.dayOfMonth.toString())
     }
 }

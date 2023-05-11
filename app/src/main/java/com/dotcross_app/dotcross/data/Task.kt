@@ -2,6 +2,8 @@ package com.dotcross_app.dotcross.data
 
 import java.time.LocalDate
 
+// Data Class that represents a ask object. Uses a selection Enum on its map to represent the
+// selection status of each day in the Map
 data class Task(
     val id: Int = 0,
     val name: String,

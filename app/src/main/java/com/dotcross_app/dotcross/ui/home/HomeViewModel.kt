@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+// View model class to act as the data layer for the Home Screen
 class HomeViewModel : ViewModel() {
     // Home screen state
     private val _taskList = MutableStateFlow<List<Task>>(emptyList())

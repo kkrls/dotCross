@@ -22,11 +22,13 @@ import com.dotcross_app.dotcross.ui.navigation.NavigationDestination
 import com.dotcross_app.dotcross.ui.theme.DotCrossTheme
 import kotlinx.coroutines.launch
 
+// Companion object used for the NavGraph
 object AddTaskDestination : NavigationDestination {
     override val route = "add_task"
     override val title = R.string.add_task_name
 }
 
+// Composable to represent the App's screen to add a new task
 @Composable
 fun AddTaskScreen(
     modifier: Modifier = Modifier,

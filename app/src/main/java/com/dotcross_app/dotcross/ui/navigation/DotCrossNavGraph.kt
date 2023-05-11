@@ -16,6 +16,8 @@ import com.dotcross_app.dotcross.ui.task.AddTaskScreen
 import com.dotcross_app.dotcross.ui.task.TaskCalendarDestination
 import com.dotcross_app.dotcross.ui.task.TaskCalendarScreen
 
+// Handles the navigation for dotCross. Uses the NavigationDestination objects defined
+// in each class of the app screens
 @Composable
 fun DotCrossNavHost(
     navController: NavHostController,

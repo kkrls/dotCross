@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
+// Reusable top app bar composable used in Calendar and Add Task screens
 @Composable
 fun DotCrossTopAppBar(
     text: String,

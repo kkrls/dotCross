@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.util.Date
 
+// ViewModel for the DayView composable in TaskCalendarScreen
 class DaySelectionViewModel(taskId: Int, date: LocalDate): ViewModel()  {
 
     private val _datesSelected = MutableStateFlow<Map<LocalDate, Selection>>(emptyMap())

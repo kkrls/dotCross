@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.dotcross_app.dotcross.data.Task
 import com.dotcross_app.dotcross.data.TasksRepository
 
+// View model of the Calendar Screen
 class TaskCalendarViewModel(
     savedStateHandle: SavedStateHandle,
     private val tasksRepository: TasksRepository

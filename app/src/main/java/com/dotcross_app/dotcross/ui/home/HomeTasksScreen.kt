@@ -28,12 +28,13 @@ import com.dotcross_app.dotcross.ui.navigation.NavigationDestination
 import com.dotcross_app.dotcross.ui.theme.DotCrossTheme
 import java.time.LocalDate
 
-
+// Navigation attributes used in the Application's NavGraph
 object HomeDestination : NavigationDestination {
     override val route = "home"
     override val title = R.string.app_name
 }
 
+// Parent Home screen Composable
 @Composable
 fun DotCrossHomeScreen(
     navigateToTaskEntry: () -> Unit,
@@ -76,6 +77,7 @@ fun DotCrossHomeScreen(
     }
 }
 
+// Top app bar used only in the Home Screen
 @Composable
 private fun DotCrossTopBar(modifier: Modifier = Modifier) {
     Row(
@@ -98,6 +100,7 @@ private fun DotCrossTopBar(modifier: Modifier = Modifier) {
     }
 }
 
+// Composable that generates the main body Task List or shows an empty screen if there are no Tasks
 @Composable
 fun HomeBodyContent(
     taskList: List<Task>,
@@ -121,7 +124,7 @@ fun HomeBodyContent(
     }
 }
 
-
+// Composable that displays the list of individual Task Card components
 @Composable
 private fun TaskList(
     taskList: List<Task>,
@@ -138,6 +141,8 @@ private fun TaskList(
     }
 }
 
+// Composable that is represents a Single task. Displays the task name and the selection status
+// for the last three days
 @Composable
 private fun TaskView(
     task: Task,
@@ -182,6 +187,7 @@ private fun TaskView(
     }
 }
 
+// Displays the images according to the selection status of the last three days
 @Composable
 fun TaskImages(
     modifier: Modifier = Modifier,
@@ -238,7 +244,7 @@ fun TaskImages(
     }
 }
 
-
+// Utility method to fetch the last three days before the current date
 private fun getLastThreeDaysBeforeToday(): List<LocalDate> {
     var dates = mutableListOf<LocalDate>()
 
@@ -250,6 +256,7 @@ private fun getLastThreeDaysBeforeToday(): List<LocalDate> {
     return dates
 }
 
+// Method to return the correct image resource id according to the selection date
 private fun getTaskImageResource(selection: Selection?): Int {
 
     val imageResource = when (selection) {

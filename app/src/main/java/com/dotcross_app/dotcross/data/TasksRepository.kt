@@ -4,6 +4,7 @@ import java.time.LocalDate
 import java.util.stream.Collectors.toMap
 import kotlin.random.Random
 
+// Task repository to be used for app testing before implementing a database functionality
 class TasksRepository {
 
     var tasksList = mutableListOf(
