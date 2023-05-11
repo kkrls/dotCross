@@ -1,11 +1,10 @@
 package com.dotcross_app.dotcross.data
 
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
 import java.time.LocalDate
+import java.util.stream.Collectors.toMap
 import kotlin.random.Random
 
-class TasksRepository() {
+class TasksRepository {
 
     var tasksList = mutableListOf(
         Task(0, name = "Gym", datesSelected = getRandomDateMap()),
@@ -22,7 +21,7 @@ class TasksRepository() {
         val randomNumberOfDays = Random.nextInt(30)
         var i = 1
 
-        while(i < randomNumberOfDays) {
+        while (i < randomNumberOfDays) {
             val date = LocalDate.now().minusDays(i.toLong())
             val selection = Selection.randomValue()
             mapReturned.putIfAbsent(date, selection)
@@ -35,12 +34,31 @@ class TasksRepository() {
         return tasksList
     }
 
-    fun addToTaskList(name: String){
-        tasksList.add(Task(id = tasksList.size + 1, name = name))
+    fun addToTaskList(name: String) {
+        val newId = tasksList.size + 1
+        tasksList.add(Task(id = newId, name = name))
     }
 
-    fun getTask(taskId: Int): Flow<Task?> {
-        return getTask(taskId)
+    fun getTask(taskId: Int): Task {
+        return tasksList[taskId]
+    }
+
+    fun addSelection(taskId: Int, date: LocalDate){
+        val currentMap = tasksList.elementAt(taskId).datesSelected.toMutableMap()
+        val currentState = tasksList[taskId].datesSelected[date]
+        var newState: Selection
+
+        when(currentState) {
+            Selection.BLANK -> newState = Selection.SELECTED
+            Selection.SELECTED -> newState = Selection.UNSELECTED
+            Selection.UNSELECTED -> newState = Selection.SELECTED
+            else -> {
+                newState = Selection.BLANK
+            }
+        }
+        currentMap[date] = newState
+        tasksList[taskId].datesSelected = currentMap
+
     }
 
 }

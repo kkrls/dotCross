@@ -2,10 +2,9 @@ package com.dotcross_app.dotcross.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
 import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.dotcross_app.dotcross.data.Task
@@ -22,7 +21,7 @@ fun DotCrossNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
     taskList: MutableList<Task> = TasksRepository().getTaskList()
-){
+) {
     NavHost(
         navController = navController,
         startDestination = HomeDestination.route,
@@ -30,14 +29,13 @@ fun DotCrossNavHost(
     ) {
         composable(route = HomeDestination.route) {
             DotCrossHomeScreen(
-                taskList = taskList,
                 navigateToTaskEntry = { navController.navigate(AddTaskDestination.route) },
                 navigateToCalendarView = {
                     navController.navigate("${TaskCalendarDestination.route}/${it}")
                 }
             )
         }
-        composable(route = AddTaskDestination.route){
+        composable(route = AddTaskDestination.route) {
             AddTaskScreen(
                 navigateBack = { navController.popBackStack() },
                 onNavigateUp = { navController.navigateUp() })
@@ -49,7 +47,8 @@ fun DotCrossNavHost(
             })
         ) { backStackEntry ->
             TaskCalendarScreen(
-                navigateBack = { navController.navigateUp()},
+                navigateBack = { navController.navigateUp() },
+                onNavigateUp = { navController.navigateUp() },
                 taskId = backStackEntry.arguments?.getInt("taskId")
             )
         }

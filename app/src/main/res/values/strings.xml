@@ -7,4 +7,7 @@
     <string name="create_task_button">Create Task</string>
     <string name="add_task_name">Add Task</string>
     <string name="task_calendar_title">Task Calendar View</string>
+    <string name="change_task_name_button">Change Task Name</string>
+    <string name="clear_month_button">Clear Month</string>
+    <string name="delete_task_button">Delete Task</string>
 </resources>

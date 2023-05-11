@@ -1,23 +1,23 @@
 package com.dotcross_app.dotcross.ui.task
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.dotcross_app.dotcross.data.TasksRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
-class AddTaskViewModel (var tasksRepository: TasksRepository = TasksRepository()): ViewModel() {
+class AddTaskViewModel : ViewModel() {
 
-    var taskUiState by mutableStateOf(TaskUiState())
-        private set
+    private val _name = MutableStateFlow("")
 
-    fun updateUiState(newTaskUiState: TaskUiState){
-        taskUiState = newTaskUiState.copy(enabled = newTaskUiState.isValid())
+    // Backing property for immutability
+    val name: StateFlow<String> = _name.asStateFlow()
+
+    fun setName(name: String) {
+        _name.value = name
     }
 
-    suspend fun saveTask(name: String) {
-        if (taskUiState.isValid()) {
-            tasksRepository.addToTaskList(name = name)
-        }
+    fun saveTask() {
+        TasksRepository().addToTaskList(name = _name.value)
     }
 }
